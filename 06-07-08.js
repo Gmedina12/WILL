@@ -10,16 +10,22 @@ function crearClasePersona() {
       // El constructor de la clase Persona recibe nombre (string), edad (integer), hobbies (array de strings), amigos (array de objetos)
       // Inicializar las propiedades de la persona con los valores recibidos como argumento
 
-      // Tu código aca:
+     this.nombre=nombre;
+     this.edad=parseInt(edad,10);
+     this.hobbies=[...hobbies];
+     this.amigos=amigos;  
 
     }
+  
+/**En la línea this.edad = parseInt(edad, 10);, utilizamos parseInt() para convertir el valor de "edad" a un número entero. 
+ * El segundo argumento 10 se utiliza para especificar que se trata de un número en base 10 (decimal). */
 
     addFriend(nombre, edad) {
       // El método 'addFriend' recibe un string 'nombre' y un entero 'edad' y debe agregar un objeto:
       // { nombre: nombre, edad: edad} al arreglo de amigos de la persona.
       // No debe retornar nada.
 
-      // Tu código aca:
+      this.amigos.push({ nombre, edad });
 
     }
 
@@ -27,7 +33,7 @@ function crearClasePersona() {
       // El método 'addHobby' recibe un string 'hobby' y debe agregarlo al arreglo de hobbies de la persona.
       // No debe retornar nada.
 
-      // Tu código aca:
+      this.hobbies.push(hobby);
 
     }
     getFriends() {
@@ -37,16 +43,19 @@ function crearClasePersona() {
       // Suponiendo que la persona tiene estos amigos: [{nombre: 'martin', edad: 31},{nombre: 'toni', edad: 33}]
       // persona.getFriends() debería devolver ['martin', 'toni']
 
-      // Tu código aca:
-
+      return this.amigos.map(amigo => amigo.nombre);
     }
+
+    /**Cuando necesite hacer operaciones con los elementos de un arreglo u obtenerlos, con map
+     * creo una copia del arreglo, recorrerlo y mostrarlo
+     */
 
     getHobbies() {
       // El método 'getHobbies' debe retornar un arreglo con los hobbies de la persona
       // Ej:
       // persona.getHobbies() debe devolver ['correr', 'dormir', 'nadar']
 
-      // Tu código aca:
+      return this.hobbies.map(hobby => hobby.nombre);
 
     }
 
@@ -65,10 +74,10 @@ function crearClasePersona() {
       // }
       // persona.getPromedioEdad() debería devolver 29 ya que (33 + 25) / 2 = 29
 
-      // Tu código aca:
-
+      var promedio = this.amigos.map(amigo => amigo.edad).reduce((acumulador, valor) => acumulador + valor, 0) / this.amigos.length;
+      return promedio;
     }
-  };
+  }
 
   return Persona;
 }
